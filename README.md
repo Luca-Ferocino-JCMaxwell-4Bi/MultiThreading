@@ -1,4 +1,4 @@
-il codice caricato sulla piattaforma riguardera la con-correnza (e' il verificarsi di eventi allo stesso tempo "contemporaneamente"
+Il codice caricato sulla piattaforma riguardera la con-correnza (e' il verificarsi di eventi allo stesso tempo "contemporaneamente"
 per citare un nostro vecchi progetto vi pongo un esempio Supponiamo che piu' utenti debbano usare il registro elettronico, se il programma fosse progettatto senza usare la programmazione concorrenziale (multithreading), solo un utente alla volta sarebbe in grado di accedervi.
 ma cos'è un thread ? beh un thread è e' una porzione di un programma che viene eseguito contemporaneamente ad altre porzioni dello stesso programma.
 Spesso THREADs comunicano, condividono risorse, collaborano e hanno parte di codice in comune.
