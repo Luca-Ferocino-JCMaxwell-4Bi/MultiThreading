@@ -10,7 +10,8 @@ public class MultiThread {
     /**
      * @param args the command line arguments
      * @throws java.lang.InterruptedException
-     */
+
+*/
     // "main" e' il THREAD principale da cui vengono creati e avviati tutti gli altri THREADs
     // i vari THREADs poi evolvono indipendentemente dal "main" che puo' eventualmente terminare prima degli altri
     public static void main(String[] args) throws InterruptedException {
@@ -51,13 +52,21 @@ public class MultiThread {
     
 }
 
+// Classe per l'oggetto MONITOR
+class Schermi {
+
+  String ultimoTHREAD = ""; // ultimo thread che ha scritto sullo schermo
+  int punteggio = 0;        // anche punteggio viene condiviso dai threads
+
+  public int punteggio() {  // fornisce il punteggio
+    return this.punteggio;
+  }
+
 // Ci sono vari metodi per creare i thread in java
 // +1 si puo estendere da un altra classe
 // +1 si possono passare parametri (usando il Costruttore)
 // +1 si puo' controllare quando un THREAD inizia indipendentemente da quando e' stato creato
 class TicTacToe implements Runnable {
-    public static int Punteggio = 0;
-    public static String ThreadPrecedente = "   ";
     // non essesndo "static" c'e' una copia delle seguenti variabili per ogni THREAD 
     private String t;
     private String msg;
@@ -70,7 +79,7 @@ class TicTacToe implements Runnable {
     @Override // Annotazione per il compilatore
     // se facessimo un overloading invece di un override il copilatore ci segnalerebbe l'errore
     
-    public void run() {
+    public synchronized void run() {
         Random random = new Random();
         int j = 100;
         int n = 300-j;
