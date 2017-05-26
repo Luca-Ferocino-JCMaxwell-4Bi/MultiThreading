@@ -2,7 +2,7 @@
  * Con questo programma voglio illustrare i seguenti concetti:
  * 1. MAIN e' un thread come gli altri e quindi puo' terminare prima che gli altri
  * 2. THREADs vengono eseguiti allo stesso tempo
- * 3. THREADs possono essere interrotti e hanno la possibilita' di interrompersi in modo pulito
+/ * 3. THREADs possono essere interrotti e hanno la possibilita' di interrompersi in modo pulito
  * 4. THREADs possono essere definiti mediante una CLASSE che implementa un INTERFACCIA Runnable
  * 5. THREADs possono essere avviati in modo indipendente da quando sono stati definiti
  * 6. posso passare parametri al THREADs tramite il costruttore della classe Runnable
@@ -13,10 +13,10 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 /**
  *
- * @author Matteo Palitto
+ 
  */
 public class MultiThread {
-    int Punteggio = 0;
+    
     /**
      * @param args the command line arguments
      * @throws java.lang.InterruptedException
@@ -34,11 +34,12 @@ public class MultiThread {
         Thread tac = new Thread(new TicTacToe("TAC"));
         
         Thread toe = new Thread(new TicTacToe("TOE"));
-        
+        // partenza threads
         tic.start();
         tac.start();
         toe.start();
-        
+          // Attendo che l'esecuzione di ogni thread termini
+
         try{
             tic.join();
         }catch(InterruptedException e){System.out.println(e);}
@@ -76,11 +77,19 @@ class TicTacToe implements Runnable {
     public TicTacToe (String s) {
         this.t = s;
     }
+    //classe schermi per la condivisione   di risorse  tra threads
+    class Schermi {
+     String ultimoTHREAD = ""; // ultimo thread che ha scritto sullo schermo
+     int punteggio = 0;        // anche punteggio viene condiviso dai threads
+    
+public int punteggio() {  // fornisce il punteggio
+     return this.punteggio;
+  }
     
     @Override // Annotazione per il compilatore
     // se facessimo un overloading invece di un override il copilatore ci segnalerebbe l'errore
-    // per approfondimenti http://lancill.blogspot.it/2012/11/annotations-override.html
-    public void run() {
+        //metodo synchronized. impedisce il verificarsi in contemporanea di piu istanze 
+    public synchronized void compila(String t, String msg) {
         Random random = new Random();
         int j = 100;
         int n = 300-j;
